@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffdde1;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .heart {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: relative;
+            transform: rotate(-45deg);
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .heart:before, .heart:after {
+            content: "";
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart:before {
+            top: -50px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 50px;
+            top: 0;
+        }
+
+        .heart:active {
+            transform: rotate(-45deg) scale(1.2);
+        }
+
+        .text-container {
+            text-align: center;
+            margin-top: 20px;
+            opacity: 0;
+            transform: scale(0);
+            transition: opacity 1s ease, transform 0.5s ease-in-out;
+        }
+
+        .text-container.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .animation {
+            position: absolute;
+            font-size: 30px;
+            color: pink;
+            opacity: 0;
+            animation: floatUp 1.5s ease-in-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heart" id="heart" onclick="showMessage()"></div>
+
+    <div class="text-container" id="message">
+        <h2>SHOT NA! ❤️</h2>
+        <p>Dear Yvonne Payagan moana si Paolo
+            na uminom kasama ko kahit 2 bottles lang kami
+            Thankyou
+        </p>
+    </div>
+
+    <script>
+        function showMessage() {
+            document.getElementById('message').classList.add('show');
+            document.getElementById('heart').classList.add('hidden'); // Itatago ang puso pagkatapos ng click
+
+            // Create animation elements
+            for (let i = 0; i < 5; i++) {
+                let animation = document.createElement('div');
+                animation.classList.add('animation');
+                animation.innerHTML = '❤️';
+                animation.style.left = `${Math.random() * 100}vw`;
+                animation.style.top = '50%';
+                document.body.appendChild(animation);
+
+                setTimeout(() => {
+                    animation.remove();
+                }, 1500);
+            }
+        }
+    </script>
+
+</body>
+</html>
