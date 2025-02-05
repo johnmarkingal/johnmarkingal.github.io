@@ -3,121 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heart Animation</title>
+    <title>SHOT NA!</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #ffdde1;
-            flex-direction: column;
             font-family: Arial, sans-serif;
-            overflow: hidden;
-        }
-
-        .heart {
-            width: 100px;
-            height: 100px;
-            background-color: red;
-            position: relative;
-            transform: rotate(-45deg);
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .heart:before, .heart:after {
-            content: "";
-            width: 100px;
-            height: 100px;
-            background-color: red;
-            border-radius: 50%;
-            position: absolute;
-        }
-
-        .heart:before {
-            top: -50px;
-            left: 0;
-        }
-
-        .heart:after {
-            left: 50px;
-            top: 0;
-        }
-
-        .heart:active {
-            transform: rotate(-45deg) scale(1.2);
-        }
-
-        .text-container {
             text-align: center;
+            margin: 50px;
+            background-color: #222;
+            color: white;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        .buttons {
             margin-top: 20px;
-            opacity: 0;
-            transform: scale(0);
-            transition: opacity 1s ease, transform 0.5s ease-in-out;
+            position: relative;
         }
-
-        .text-container.show {
-            opacity: 1;
-            transform: scale(1);
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: 0.3s;
         }
-
-        .animation {
+        .yes {
+            background-color: #28a745;
+            color: white;
+        }
+        .no {
+            background-color: #dc3545;
+            color: white;
             position: absolute;
-            font-size: 30px;
-            color: pink;
-            opacity: 0;
-            animation: floatUp 1.5s ease-in-out forwards;
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
-        }
-
-        .hidden {
-            display: none;
         }
     </style>
 </head>
 <body>
-
-    <div class="heart" id="heart" onclick="showMessage()"></div>
-
-    <div class="text-container" id="message">
-        <h2>SHOT NA! ❤️</h2>
-        <p>Dear Yvonne Payagan moana si Paolo
-            na uminom kasama ko kahit 2 bottles lang kami
-            Thankyou
-        </p>
+    <div class="container">
+        <h1>SHOT NA! 🥃🔥</h1>
+        <p>Walang atrasan! Ano, game ka ba?</p>
+        <div class="buttons">
+            <button class="yes" onclick="shotYes()">YES ✅</button>
+            <button class="no" id="noButton" onmouseover="moveNoButton()">NO ❌</button>
+        </div>
+        <p id="message"></p>
     </div>
 
     <script>
-        function showMessage() {
-            document.getElementById('message').classList.add('show');
-            document.getElementById('heart').classList.add('hidden'); // Itatago ang puso pagkatapos ng click
-
-            // Create animation elements
-            for (let i = 0; i < 5; i++) {
-                let animation = document.createElement('div');
-                animation.classList.add('animation');
-                animation.innerHTML = '❤️';
-                animation.style.left = `${Math.random() * 100}vw`;
-                animation.style.top = '50%';
-                document.body.appendChild(animation);
-
-                setTimeout(() => {
-                    animation.remove();
-                }, 1500);
-            }
+        function shotYes() {
+            document.getElementById("message").innerHTML = "Tara! Walang iwanan! 🥂🔥";
+        }
+        function moveNoButton() {
+            let noButton = document.getElementById("noButton");
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 100);
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
         }
     </script>
-
 </body>
 </html>
